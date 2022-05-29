@@ -16,7 +16,6 @@ export const getCityList = async (Multiselect ) => {
       return data
     } catch (e) {
       throw new Error('ошибка получения геокодинга')
-
     }
   }
 }

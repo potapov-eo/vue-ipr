@@ -41,15 +41,18 @@ export default {
     const Multiselect = ref(null)
     const isLoading = ref(false)
     const options = ref([])
-    console.log('options.value', options.value)
     const getOptions = async () => {
-
-       const optionsList = await getCityList(Multiselect)
-       options.value = optionsList.response.GeoObjectCollection.featureMember.map(item => ({
-         ...item,
-         label: `${item.GeoObject.name}, ${item.GeoObject.description}`
-       }))
-
+      try {
+        const optionsList = await getCityList(Multiselect)
+       if(optionsList) {
+         options.value = optionsList.response.GeoObjectCollection.featureMember.map(item => ({
+           ...item,
+           label: `${item.GeoObject.name}, ${item.GeoObject.description}`
+         }))
+       }
+      } catch (e) {
+        alert('Ошибка получения опций(гео)')
+      }
     }
 
     return {
