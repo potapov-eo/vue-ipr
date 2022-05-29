@@ -20,7 +20,7 @@ import VueMultiselect from 'vue-multiselect'
 import { ref, watch, computed } from 'vue'
 import axios from 'axios'
 import config from '/config'
-import SelectComponent from '/src/components/SelectComponent'
+import SelectComponent from '/src/components/SelectComponent/SelectComponent'
 import { useStore } from 'vuex'
 import WeatherCard from '../components/WeatherCard'
 

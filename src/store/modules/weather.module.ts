@@ -1,14 +1,15 @@
 import axios from 'axios'
 import config from "../../../config";
+import {IWeatherData} from "@Weather";
 
-export type weatherType = any
+export type weatherType = IWeatherData
 export type weatherStateType = {
-  weather: weatherType
+  weather: weatherType | null
 }
 
 export default {
   namespaced: true,
-  state() {
+  state():weatherStateType {
     return {
       weather: null
     }

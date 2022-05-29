@@ -5,10 +5,15 @@
     ref="Multiselect"
     v-model="selectValue"
     :options="options"
-    @keyup="asyncFind"
+    @keyup="getOptions"
     label="label"
   >
     <template v-slot:noResult>
+      <span>
+    ВВедите минимум три символа, либо попробуйте изменить запрос
+  </span>
+    </template>
+    <template v-slot:noOptions>
       <span>
     ВВедите минимум три символа, либо попробуйте изменить запрос
   </span>
@@ -27,42 +32,29 @@
 <script>
 import VueMultiselect from 'vue-multiselect'
 import { ref } from 'vue'
-import axios from 'axios'
-import config from '/config'
-import WeatherCard from '../components/WeatherCard'
+import WeatherCard from '../WeatherCard'
+import { getCityList } from '@/components/SelectComponent/utils'
 
 export default {
-  props: {selectValue:{}} ,
+  props: { selectValue: {} },
   setup (props) {
     const Multiselect = ref(null)
     const isLoading = ref(false)
     const options = ref([])
+    console.log('options.value', options.value)
+    const getOptions = async () => {
 
-    const asyncFind = async () => {
-      const searchValue = Multiselect.value.search
+       const optionsList = await getCityList(Multiselect)
+       options.value = optionsList.response.GeoObjectCollection.featureMember.map(item => ({
+         ...item,
+         label: `${item.GeoObject.name}, ${item.GeoObject.description}`
+       }))
 
-      if ( searchValue.length > 2 ) {
-        try {
-          const { data } = await axios.get(config.geoApi, {
-            params: {
-              apikey: config.apiKeyGeo,
-              format: 'json',
-              geocode: searchValue
-            }
-          })
-          options.value = data.response.GeoObjectCollection.featureMember.map(item => ({
-            ...item,
-            label: `${item.GeoObject.name}, ${item.GeoObject.description}`
-          }))
-        } catch (e) {
-          alert('ошибка получения геокодинга')
-        }
-      }
     }
 
     return {
       options,
-      asyncFind,
+      getOptions,
       Multiselect,
       isLoading,
     }
@@ -74,4 +66,4 @@ export default {
 }
 </script>
 
-<style src="vue-multiselect/dist/vue-multiselect.css"></style>
+<style src="../../../node_modules/vue-multiselect/dist/vue-multiselect.css"></style>
