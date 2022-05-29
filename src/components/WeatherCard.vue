@@ -12,8 +12,6 @@ export default {
   props: ['weather'],
 
   setup(props) {
-debugger
-    console.log('props', props)
 
     return {
     }

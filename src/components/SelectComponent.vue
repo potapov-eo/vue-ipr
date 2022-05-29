@@ -1,48 +1,42 @@
 /* eslint-disable */
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-    <SelectComponent  v-model="selectValue"></SelectComponent>
-  </div>
 
-  <div v-if="!!weatherValueList">
-    <h1>weatherValue</h1>
-    <WeatherCard
-      v-for="item in weatherValueList"
-      :weather="item">
-    </WeatherCard>
-  </div>
-  <div v-else> weatherValue = 0</div>
+  <VueMultiselect
+    ref="Multiselect"
+    v-model="selectValue"
+    :options="options"
+    @keyup="asyncFind"
+    label="label"
+  >
+    <template v-slot:noResult>
+      <span>
+    ВВедите минимум три символа, либо попробуйте изменить запрос
+  </span>
+    </template>
+    <template v-slot:selection="{ values, isOpen }">
+        <span class="multiselect__single"
+              v-if="values.length &amp;&amp; !isOpen">
+          {{ values.length }} options selected
+        </span>
+    </template>
+  </VueMultiselect>
+
+
 </template>
 
 <script>
 import VueMultiselect from 'vue-multiselect'
-import { ref, watch, computed } from 'vue'
+import { ref } from 'vue'
 import axios from 'axios'
 import config from '/config'
-import SelectComponent from '/src/components/SelectComponent'
-import { useStore } from 'vuex'
 import WeatherCard from '../components/WeatherCard'
 
 export default {
-  setup () {
-    const store = useStore()
-    const selectValue = ref(null)
+  props: {selectValue:{}} ,
+  setup (props) {
     const Multiselect = ref(null)
     const isLoading = ref(false)
     const options = ref([])
-
-    // ToDo почему не перерисовывается weatherValue
-    const weatherValueList = ref(null)
-    const weatherValue = computed(() => store.getters['weather/weather'])
-    watch(weatherValue, (weatherValue) => {
-      weatherValueList.value = weatherValue.list
-    })
-
-    //получение погоды
-    watch(selectValue, async (selectValue) => {
-      await store.dispatch('weather/getWeather', { value:selectValue })
-    })
 
     const asyncFind = async () => {
       const searchValue = Multiselect.value.search
@@ -67,19 +61,15 @@ export default {
     }
 
     return {
-      selectValue,
       options,
       asyncFind,
       Multiselect,
       isLoading,
-      weatherValue,
-      weatherValueList
     }
   },
   components: {
     VueMultiselect,
-    WeatherCard,
-    SelectComponent
+    WeatherCard
   }
 }
 </script>
