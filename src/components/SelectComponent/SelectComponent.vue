@@ -33,7 +33,8 @@
 import VueMultiselect from 'vue-multiselect'
 import { ref } from 'vue'
 import WeatherCard from '../WeatherCard'
-import { getCityList } from '@/components/SelectComponent/utils'
+import { getCityList } from '@/api/getGeo'
+
 
 export default {
   props: { selectValue: {} },

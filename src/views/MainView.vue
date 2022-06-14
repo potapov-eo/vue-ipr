@@ -18,8 +18,6 @@
 <script>
 import VueMultiselect from 'vue-multiselect'
 import { ref, watch, computed } from 'vue'
-import axios from 'axios'
-import config from '/config'
 import SelectComponent from '/src/components/SelectComponent/SelectComponent'
 import { useStore } from 'vuex'
 import WeatherCard from '../components/WeatherCard'
@@ -44,32 +42,10 @@ export default {
       await store.dispatch('weather/getWeather', { value:selectValue })
     })
 
-    const asyncFind = async () => {
-      const searchValue = Multiselect.value.search
-
-      if ( searchValue.length > 2 ) {
-        try {
-          const { data } = await axios.get(config.geoApi, {
-            params: {
-              apikey: config.apiKeyGeo,
-              format: 'json',
-              geocode: searchValue
-            }
-          })
-          options.value = data.response.GeoObjectCollection.featureMember.map(item => ({
-            ...item,
-            label: `${item.GeoObject.name}, ${item.GeoObject.description}`
-          }))
-        } catch (e) {
-          alert('ошибка получения геокодинга')
-        }
-      }
-    }
 
     return {
       selectValue,
       options,
-      asyncFind,
       Multiselect,
       isLoading,
       weatherValue,
