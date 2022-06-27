@@ -5,10 +5,10 @@
     <SelectComponent  v-model="selectValue"></SelectComponent>
   </div>
 
-  <div v-if="!!weatherValueList">
+  <div v-if="!!weatherValue?.list">
     <h1>weatherValue</h1>
     <WeatherCard
-      v-for="item in weatherValueList"
+      v-for="item in weatherValue?.list"
       :weather="item">
     </WeatherCard>
   </div>
@@ -30,18 +30,13 @@ export default {
     const isLoading = ref(false)
     const options = ref([])
 
-    // ToDo почему не перерисовывается weatherValue
-    const weatherValueList = ref(null)
     const weatherValue = computed(() => store.getters['weather/weather'])
-    watch(weatherValue, (weatherValue) => {
-      weatherValueList.value = weatherValue.list
-    })
+
 
     //получение погоды
     watch(selectValue, async (selectValue) => {
       await store.dispatch('weather/getWeather', { value:selectValue })
     })
-
 
     return {
       selectValue,
@@ -49,7 +44,6 @@ export default {
       Multiselect,
       isLoading,
       weatherValue,
-      weatherValueList
     }
   },
   components: {

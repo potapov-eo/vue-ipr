@@ -31,6 +31,7 @@ export default {
           }
         })
         commit('setWeather', {weather: data})
+       // window.location.replace(window.location+'lat'+lat)
       } catch (e) {
         alert('ошибка получения погоды')
       }

@@ -7,6 +7,7 @@
     :options="options"
     @keyup="getOptions"
     label="label"
+    @close="clearOptions"
   >
     <template v-slot:noResult>
       <span>
@@ -55,12 +56,16 @@ export default {
         alert('Ошибка получения опций(гео)')
       }
     }
+    const clearOptions = () => {
+      options.value = []
+    }
 
     return {
       options,
       getOptions,
       Multiselect,
       isLoading,
+      clearOptions
     }
   },
   components: {

@@ -3,7 +3,7 @@ import MainView from '../views/MainView.vue'
 
 const routes = [
   {
-    path: '/',
+    path: '/home',
     name: 'home',
     component: MainView
   },
