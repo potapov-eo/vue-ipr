@@ -4,7 +4,7 @@ import ErrorPage from '../views/404.vue'
 
 const routes = [
   {
-    path: '/home/:lat?/:lon?',
+    path: '/home',
     name: 'home',
     component: MainView,
     alias: '/'

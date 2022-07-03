@@ -21,24 +21,27 @@ export default {
   },
   actions: {
     async getWeather({ commit, dispatch }, payload) {
-      const [lon, lat] = payload.value.GeoObject.Point.pos.split(' ')
+     // const [lon, lat] = payload.value.GeoObject.Point.pos.split(' ')
       try {
         const { data } = await axios.get(config.weatherApi, {
           params: {
             appid: config.apiKeyWeather,
-            lat,
-            lon
+            lat:payload.lat,
+            lon:payload.lon,
+            units:'metric',
+            lang: 'ru',
           }
         })
         commit('setWeather', {weather: data})
         //location.pathname = (`home/${lat}/${lon}`)
-       // window.history.pushState("object or string", "Title", `home/${lat}/${lon}`)
-        //window.location.replace(`home/${lat}/${lon}`)
+
+        //window.location.replace(`home?lat=${lat}&lon=${lon}`)
       } catch (e) {
         alert('ошибка получения погоды')
       }
     }
   },
+
   getters: {
     weather(state) {
       return state.weather

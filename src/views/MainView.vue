@@ -25,9 +25,16 @@ import { useRoute } from 'vue-router'
 
 export default {
   //props: ['lat', 'lon'],
+  beforeMount  () {
+    const route = useRoute()
+    const store = useStore()
+   const {lon, lat} = route.query
+    console.log(route.query.lat)
+    console.log(route.query.lon)
+    if (lon && lat)store.dispatch('weather/getWeather', {lon, lat})
+  },
   setup (props) {
     const {  } = toRefs(props)
-    const route = useRoute()
     const store = useStore()
     const selectValue = ref(null)
     const Multiselect = ref(null)
@@ -37,17 +44,14 @@ export default {
     const weatherValue = computed(() => store.getters['weather/weather'])
 
 
-    console.log(route.params.lat)
-    console.log(route.params.lon)
-
     //if()
 
     //получение погоды
     watch(selectValue, async (selectValue) => {
-      await store.dispatch('weather/getWeather', { value:selectValue })
+      const [lon, lat] = selectValue.GeoObject.Point.pos.split(' ')
+      window.history.pushState("lat-lon", "lat-lon", `home?lat=${lat}&lon=${lon}`)
+      await store.dispatch('weather/getWeather', { lon, lat })
     })
-
-
 
 
     return {
