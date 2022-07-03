@@ -12,5 +12,6 @@ export default createStore({
   },
   modules: {
     weather
-  }
+  },
+  strict: process.env.NODE_ENV !== 'production'
 })

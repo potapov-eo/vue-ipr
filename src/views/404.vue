@@ -1,0 +1,20 @@
+<template>
+  <h1>
+    404
+  </h1>
+  <h1>
+    Страница не найдена
+  </h1>
+</template>
+<script>
+
+export default {
+  setup () {
+
+  },
+
+
+  components: {}
+}
+</script>
+

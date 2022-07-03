@@ -31,7 +31,9 @@ export default {
           }
         })
         commit('setWeather', {weather: data})
-       // window.location.replace(window.location+'lat'+lat)
+        //location.pathname = (`home/${lat}/${lon}`)
+       // window.history.pushState("object or string", "Title", `home/${lat}/${lon}`)
+        //window.location.replace(`home/${lat}/${lon}`)
       } catch (e) {
         alert('ошибка получения погоды')
       }

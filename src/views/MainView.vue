@@ -17,13 +17,17 @@
 
 <script>
 import VueMultiselect from 'vue-multiselect'
-import { ref, watch, computed } from 'vue'
+import { toRefs, ref, watch, computed, reactive } from 'vue'
 import SelectComponent from '/src/components/SelectComponent/SelectComponent'
 import { useStore } from 'vuex'
 import WeatherCard from '../components/WeatherCard'
+import { useRoute } from 'vue-router'
 
 export default {
-  setup () {
+  //props: ['lat', 'lon'],
+  setup (props) {
+    const {  } = toRefs(props)
+    const route = useRoute()
     const store = useStore()
     const selectValue = ref(null)
     const Multiselect = ref(null)
@@ -33,10 +37,18 @@ export default {
     const weatherValue = computed(() => store.getters['weather/weather'])
 
 
+    console.log(route.params.lat)
+    console.log(route.params.lon)
+
+    //if()
+
     //получение погоды
     watch(selectValue, async (selectValue) => {
       await store.dispatch('weather/getWeather', { value:selectValue })
     })
+
+
+
 
     return {
       selectValue,
