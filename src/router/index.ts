@@ -4,24 +4,21 @@ import ErrorPage from '../views/404.vue'
 
 const routes = [
   {
-    path: '/home',
-    name: 'home',
+    path: '/weather',
+    name: 'weather',
     component: MainView,
-    alias: '/'
   },
-  {
-    path: '/about',
-    name: 'about',
-    component: () => import(/* webpackChunkName: "about" */ '../views/HomeView.vue')
+ {
+    path: '/',
+    name: 'home',
+    redirect: '/weather'
   },
   {
     path: '/:any(.*)',
     name: '404',
     component:  ErrorPage
   },
-
 ]
-
 const router = createRouter({
   history: createWebHistory(),
   routes

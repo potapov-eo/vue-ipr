@@ -1,7 +1,6 @@
 /* eslint-disable */
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
     <SelectComponent v-model="selectValue"></SelectComponent>
 
     <div v-if="!!weatherValue?.list">
@@ -30,7 +29,6 @@ import { useRoute } from 'vue-router'
 import { BCarousel, BCarouselSlide } from 'bootstrap-vue-3'
 
 export default {
-  //props: ['lat', 'lon'],
   beforeMount () {
     const route = useRoute()
     const store = useStore()

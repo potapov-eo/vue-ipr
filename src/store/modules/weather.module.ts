@@ -33,9 +33,6 @@ export default {
           }
         })
         commit('setWeather', {weather: data})
-        //location.pathname = (`home/${lat}/${lon}`)
-
-        //window.location.replace(`home?lat=${lat}&lon=${lon}`)
       } catch (e) {
         alert('ошибка получения погоды')
       }
