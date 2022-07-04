@@ -45,13 +45,7 @@ export default {
     const options = ref([])
     const getOptions = async () => {
       try {
-        const optionsList = await getCityList(Multiselect)
-
-         options.value = optionsList? optionsList.response.GeoObjectCollection.featureMember.map(item => ({
-           ...item,
-           label: `${item.GeoObject.name}, ${item.GeoObject.description}`
-         })): []
-
+         options.value = await getCityList(Multiselect)
       } catch (e) {
         alert('Ошибка получения опций(гео)')
       }
@@ -59,7 +53,6 @@ export default {
     const clearOptions = () => {
       options.value = []
     }
-
     return {
       options,
       getOptions,

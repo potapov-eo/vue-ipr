@@ -22,7 +22,6 @@ import { toRefs, ref, watch, computed, reactive } from 'vue'
 import SelectComponent from '/src/components/SelectComponent/SelectComponent'
 import AppCarousel from '/src/components/app-carousel/app-carousel'
 import AppCarouselComposition from '/src/components/app-carousel/app-carousel-compositon'
-
 import { useStore } from 'vuex'
 import WeatherCard from '../components/WeatherCard'
 import { useRoute } from 'vue-router'
