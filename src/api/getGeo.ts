@@ -1,6 +1,8 @@
 import axios from "axios";
 import config from "../../config";
-import {GeoResponse} from "@Geo";
+import {GeoResponse, GeoObject} from "@Geo";
+export type SelectOption =  {GeoObject: GeoObject, label: string}
+export type SelectOptions = SelectOption[]
 
 export const getCityList = async (Multiselect ) => {
   const searchValue = Multiselect.value.search
@@ -14,7 +16,7 @@ export const getCityList = async (Multiselect ) => {
           geocode: searchValue
         }
       })
-      const optionsList = data ? data.response.GeoObjectCollection.featureMember.map(item => ({
+      const optionsList: SelectOptions = data ? data.response.GeoObjectCollection.featureMember.map(item => ({
         ...item,
         label: `${item.GeoObject.name}, ${item.GeoObject.description}`
       })): []

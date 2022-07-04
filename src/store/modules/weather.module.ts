@@ -40,7 +40,7 @@ export default {
   },
 
   getters: {
-    weather(state) {
+    weather(state: weatherStateType) {
       return state.weather
     },
   }
