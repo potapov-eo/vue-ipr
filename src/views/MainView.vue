@@ -13,55 +13,17 @@
     </div>
     <div v-else> weatherValue = 0</div>
 
-    <b-carousel
-      ref="myCarousel"
-      id="carousel-1"
-      v-model="slide"
-      :interval="4000"
-      controls
-      indicators
-      background="#ababab"
-      img-width="1024"
-      img-height="480"
-      style="text-shadow: 1px 1px 2px #333;"
-      @sliding-start="onSlideStart"
-      @sliding-end="onSlideEnd"
-    >
-      <!-- Slides with image only -->
-      <b-carousel-slide active img-src="https://picsum.photos/1024/480/?image=58"></b-carousel-slide>
-
-      <!-- Slide with blank fluid image to maintain slide aspect ratio -->
-      <b-carousel-slide caption="Blank Image1" img-blank img-alt="Blank image">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eros felis, tincidunt
-          a tincidunt eget, convallis vel est. Ut pellentesque ut lacus vel interdum.
-        </p>
-      </b-carousel-slide>
-      <b-carousel-slide caption="Blank Image2" img-blank img-alt="Blank image">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eros felis, tincidunt
-          a tincidunt eget, convallis vel est. Ut pellentesque ut lacus vel interdum.
-        </p>
-      </b-carousel-slide>
-      <b-carousel-slide caption="Blank Image3" img-blank img-alt="Blank image">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eros felis, tincidunt
-          a tincidunt eget, convallis vel est. Ut pellentesque ut lacus vel interdum.
-        </p>
-      </b-carousel-slide>
-    </b-carousel>
-    <button v-on:click="next">next</button>
-    <p class="mt-4">
-      Slide #: {{ slide }}<br>
-      Sliding: {{ sliding }}
-    </p>
   </div>
-
+<!--  <app-carousel></app-carousel>-->
+  <app-carousel-composition></app-carousel-composition>
 </template>
 
 <script>
 import { toRefs, ref, watch, computed, reactive } from 'vue'
 import SelectComponent from '/src/components/SelectComponent/SelectComponent'
+import AppCarousel from '/src/components/app-carousel/app-carousel'
+import AppCarouselComposition from '/src/components/app-carousel/app-carousel-compositon'
+
 import { useStore } from 'vuex'
 import WeatherCard from '../components/WeatherCard'
 import { useRoute } from 'vue-router'
@@ -103,41 +65,21 @@ export default {
         lat
       })
     })
-    const slide = ref(0)
-    const sliding = ref(null)
-    const myCarousel = ref(null)
-    const next = () => {
-      console.log('myCarousel',myCarousel)
-      debugger
-      slide.value = 3
-     // myCarousel.value.modelValue = 1
-
-    }
-    const onSlideStart = () => {
-      sliding.value = true
-    }
-    const onSlideEnd = () => {
-      sliding.value = false
-    }
-
 
     return {
       selectValue,
       options,
       isLoading,
       weatherValue,
-      slide,
-      myCarousel,
-      next,
-      onSlideStart,
-      onSlideEnd,sliding
     }
   },
   components: {
+    AppCarousel,
     BCarouselSlide,
     BCarousel,
     WeatherCard,
     SelectComponent,
+    AppCarouselComposition
   }
 }
 </script>
