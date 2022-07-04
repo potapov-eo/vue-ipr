@@ -57,7 +57,7 @@ export default {
     //получение погоды
     watch(selectValue, async (selectValue) => {
       const [lon, lat] = selectValue.GeoObject.Point.pos.split(' ')
-      window.history.pushState('lat-lon', 'lat-lon', `home?lat=${lat}&lon=${lon}`)
+      window.history.pushState('lat-lon', 'lat-lon', `weather?lat=${lat}&lon=${lon}`)
       await store.dispatch('weather/getWeather', {
         lon,
         lat

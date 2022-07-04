@@ -4,7 +4,7 @@ import ErrorPage from '../views/404.vue'
 
 const routes = [
   {
-    path: '/weather',
+    path: '/weather:any(.*)',
     name: 'weather',
     component: MainView,
   },
