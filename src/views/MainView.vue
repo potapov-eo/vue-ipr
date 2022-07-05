@@ -47,7 +47,12 @@ export default {
   setup (props) {
     const {} = toRefs(props)
     const store = useStore()
-    const selectValue = ref(null)
+    const rout = useRoute()
+    const initVal = rout.query?.city ? {
+      label: rout.query?.city,
+      GeoObject: {}
+    } : null
+    const selectValue = ref(initVal)
     const isLoading = ref(false)
     const options = ref([])
 

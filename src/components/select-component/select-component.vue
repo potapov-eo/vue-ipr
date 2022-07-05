@@ -3,7 +3,6 @@
 
   <VueMultiselect
     ref="Multiselect"
-    v-model="CurrentSelectValue"
     :options="options"
     @keyup="getOptions"
     label="label"
@@ -35,20 +34,10 @@ import VueMultiselect from 'vue-multiselect'
 import { ref, watch,  } from 'vue'
 import WeatherCard from '../weather-card/weather-card'
 import { getCityList } from '@/api/getGeo'
-import { useRoute } from 'vue-router'
 
-// todo init value CurrentSelectValue
 export default {
   setup (props, context) {
-    const rout = useRoute()
-  /*  const initVal = rout.query?.city ? {
-      label: rout.query?.city,
-      value: 'initVal'
-    } : null
-    console.log('initVal', initVal)*/
     const Multiselect = ref(null)
-    const CurrentSelectValue = ref( null)
-    console.log('selectValue', CurrentSelectValue)
     const isLoading = ref(false)
     const options = ref([])
     const getOptions = async () => {
@@ -61,16 +50,12 @@ export default {
     const clearOptions = () => {
       options.value = []
     }
-   /* watch(selectValue, async (selectValue) => {
-      context.emits('update:modelValue', selectValue)
-    })*/
     return {
       options,
       getOptions,
       Multiselect,
       isLoading,
       clearOptions,
-      CurrentSelectValue
     }
   },
   components: {
