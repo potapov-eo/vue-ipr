@@ -19,11 +19,11 @@
 
 <script>
 import { toRefs, ref, watch, computed, reactive } from 'vue'
-import SelectComponent from '/src/components/SelectComponent/SelectComponent'
+import SelectComponent from '/src/components/select-component/select-component'
 import AppCarousel from '/src/components/app-carousel/app-carousel'
 import AppCarouselComposition from '/src/components/app-carousel/app-carousel-compositon'
 import { useStore } from 'vuex'
-import WeatherCard from '../components/WeatherCard'
+import WeatherCard from '../components/weather-card/weather-card'
 import { useRoute } from 'vue-router'
 import { BCarousel, BCarouselSlide } from 'bootstrap-vue-3'
 
@@ -56,7 +56,7 @@ export default {
     //получение погоды
     watch(selectValue, async (selectValue) => {
       const [lon, lat] = selectValue.GeoObject.Point.pos.split(' ')
-      window.history.pushState('lat-lon', 'lat-lon', `weather?lat=${lat}&lon=${lon}`)
+      window.history.pushState('lat-lon', 'lat-lon', `weather?lat=${lat}&lon=${lon}&city=${selectValue.label}`)
       await store.dispatch('weather/getWeather', {
         lon,
         lat
@@ -81,9 +81,12 @@ export default {
 }
 </script>
 
-<style>
+<style scoped lang="scss">
 .about {
   background: #e9ecef;
+}
+.color {
+  color: red;
 }
 
 </style>

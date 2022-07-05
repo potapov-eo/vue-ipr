@@ -45,8 +45,6 @@
 <script>
 
 import { BCarousel, BCarouselSlide } from 'bootstrap-vue-3'
-import WeatherCard from '@/components/WeatherCard'
-import SelectComponent from '@/components/SelectComponent/SelectComponent'
 export default {
   props: { selectValue: {} },
   data() {
