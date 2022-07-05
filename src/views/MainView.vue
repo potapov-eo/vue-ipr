@@ -35,8 +35,6 @@ export default {
       lon,
       lat
     } = route.query
-    console.log(route.query.lat)
-    console.log(route.query.lon)
     if ( lon && lat ) {
       store.dispatch('weather/getWeather', {
         lon,
@@ -47,9 +45,10 @@ export default {
   setup (props) {
     const {} = toRefs(props)
     const store = useStore()
-    const rout = useRoute()
-    const initVal = rout.query?.city ? {
-      label: rout.query?.city,
+    const route = useRoute()
+    const { city } = route.query
+    const initVal = city ? {
+      label:city,
       GeoObject: {}
     } : null
     const selectValue = ref(initVal)
