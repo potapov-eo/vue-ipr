@@ -55,5 +55,8 @@ export default {
     weather(state: weatherStateType) {
       return state.weather
     },
+    weatherDataInDays(state: weatherStateType) {
+      return state.weatherDataInDays
+    },
   }
 }

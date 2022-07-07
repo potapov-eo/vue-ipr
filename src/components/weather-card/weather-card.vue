@@ -1,28 +1,39 @@
 <template>
-  <h1 class="color" >{{ weather.main.temp }}</h1>
-  <h1 class="color">ssssss</h1>
+
+  <h3 class="week-day">{{  moment(weatherDataInDay[0].dt_txt).locale('ru').format('dddd') }}</h3>
+
+  <div class="weather-card">
+
+  <weather-card-item
+    v-for="item in weatherDataInDay"
+    :weather="item"  />
+
+  </div>
 </template>
 
 
 <script >
-//import '../assets/layouts/index.scss'
+import weatherCardItem from './weather-card-item'
+import './weather-card.scss'
+import moment from "moment";
 export default {
 
-  props: ['weather'],
+  props: ['weatherDataInDay'],
 
   setup(props) {
-
     return {
+      moment
     }
+  },
+  components: {
+    weatherCardItem
   }
 }
 </script>
 
 <style scoped lang="scss">
-
-/*.color2{
-  color: $primaryRed ;
-}*/
-
+.df{
+  margin: 30px 0;
+}
 
 </style>

@@ -2,6 +2,7 @@
 <template>
 
   <VueMultiselect
+    style="width: 1000px"
     ref="Multiselect"
     :options="options"
     @keyup="getOptions"
@@ -65,4 +66,9 @@ export default {
 }
 </script>
 
-<style src="../../../node_modules/vue-multiselect/dist/vue-multiselect.css"></style>
+<style src="../../../node_modules/vue-multiselect/dist/vue-multiselect.css">
+.select-style{
+
+}
+
+</style>

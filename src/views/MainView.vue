@@ -1,20 +1,20 @@
 /* eslint-disable */
 <template>
   <div class="about">
-    <SelectComponent v-model="selectValue"></SelectComponent>
 
-    <div v-if="!!weatherValue?.list">
-      <h1>weatherValue</h1>
+    <h1 class="title">Погода</h1>
+    <SelectComponent v-model="selectValue"></SelectComponent>
+    <div v-if="!!weatherDataInDays">
       <WeatherCard
-        v-for="item in weatherValue?.list"
-        :weather="item">
+        v-for="item in weatherDataInDays"
+        :weatherDataInDay="item">
       </WeatherCard>
     </div>
     <div v-else> weatherValue = 0</div>
-
+<!--    <app-carousel-composition></app-carousel-composition>-->
   </div>
 <!--  <app-carousel></app-carousel>-->
-  <app-carousel-composition></app-carousel-composition>
+
 </template>
 
 <script>
@@ -26,6 +26,8 @@ import { useStore } from 'vuex'
 import WeatherCard from '../components/weather-card/weather-card'
 import { useRoute } from 'vue-router'
 import { BCarousel, BCarouselSlide } from 'bootstrap-vue-3'
+import  './main-view.scss'
+import  '../assets/layouts/colors.scss'
 
 export default {
   beforeMount () {
@@ -56,7 +58,7 @@ export default {
     const options = ref([])
 
     const weatherValue = computed(() => store.getters['weather/weather'])
-
+    const weatherDataInDays = computed(() => store.getters['weather/weatherDataInDays'])
     //получение погоды
     watch(selectValue, async (selectValue) => {
       if(selectValue) {
@@ -74,6 +76,7 @@ export default {
       options,
       isLoading,
       weatherValue,
+      weatherDataInDays,
     }
   },
   components: {
@@ -88,11 +91,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.about {
-  background: #e9ecef;
-}
-.color {
-  color: red;
+.x{
+
 }
 
 </style>
