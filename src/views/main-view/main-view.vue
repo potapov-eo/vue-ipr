@@ -3,6 +3,7 @@
   <div class="about">
 
     <h1 class="title">Погода</h1>
+    <h4 class="time"> местное время: {{ time }} </h4>
     <SelectComponent v-model="selectValue"></SelectComponent>
     <div v-if="!!weatherDataInDays">
       <WeatherCard
@@ -10,9 +11,9 @@
         :weatherDataInDay="item">
       </WeatherCard>
     </div>
-<!--    <app-carousel-composition></app-carousel-composition>-->
+    <!--    <app-carousel-composition></app-carousel-composition>-->
   </div>
-<!--  <app-carousel></app-carousel>-->
+  <!--  <app-carousel></app-carousel>-->
 
 </template>
 
@@ -22,11 +23,13 @@ import SelectComponent from '/src/components/select-component/select-component'
 import AppCarousel from '/src/components/app-carousel/app-carousel'
 import AppCarouselComposition from '/src/components/app-carousel/app-carousel-compositon'
 import { useStore } from 'vuex'
-import WeatherCard from '../components/weather-card/weather-card/weather-card'
+import WeatherCard from '../../components/weather-card/weather-card/weather-card'
 import { useRoute } from 'vue-router'
 import { BCarousel, BCarouselSlide } from 'bootstrap-vue-3'
-import  './main-view.scss'
-import  '../assets/layouts/colors.scss'
+import './main-view.scss'
+import '../../assets/layouts/colors.scss'
+import moment from 'moment'
+import { useTime } from '@/views/main-view/use'
 
 export default {
   beforeMount () {
@@ -42,6 +45,7 @@ export default {
         lat
       })
     }
+
   },
   setup (props) {
     const {} = toRefs(props)
@@ -49,7 +53,7 @@ export default {
     const route = useRoute()
     const { city } = route.query
     const initVal = city ? {
-      label:city,
+      label: city,
       GeoObject: {}
     } : null
     const selectValue = ref(initVal)
@@ -60,7 +64,7 @@ export default {
     const weatherDataInDays = computed(() => store.getters['weather/weatherDataInDays'])
     //получение погоды
     watch(selectValue, async (selectValue) => {
-      if(selectValue) {
+      if ( selectValue ) {
         const [lon, lat] = selectValue.GeoObject.Point.pos.split(' ')
         window.history.pushState('lat-lon', 'lat-lon', `weather?lat=${lat}&lon=${lon}&city=${selectValue.label}`)
         await store.dispatch('weather/getWeather', {
@@ -70,12 +74,17 @@ export default {
       }
     })
 
+    // кастомные часы
+    // Todo очистка интервала
+    const time = useTime(weatherValue)
+
     return {
       selectValue,
       options,
       isLoading,
       weatherValue,
       weatherDataInDays,
+      time
     }
   },
   components: {
