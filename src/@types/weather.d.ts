@@ -1,6 +1,6 @@
 declare module '@Weather' {
 
-  export interface IWeatherMain {
+  export interface WeatherMain {
     temp: number;
     feels_like: number;
     temp_min: number;
@@ -12,54 +12,54 @@ declare module '@Weather' {
     temp_kf: number;
   }
 
-  export interface IWeather {
+  export interface Weather {
     id: number;
     main: string;
     description: string;
     icon: string;
   }
 
-  export interface IWeatherClouds {
+  export interface WeatherClouds {
     all: number;
   }
 
-  export interface IWeatherWind {
+  export interface WeatherWind {
     speed: number;
     deg: number;
     gust: number;
   }
 
-  export interface IWeatherRain {
+  export interface WeatherRain {
     '3h': number;
   }
 
-  export interface ISys {
+  export interface Sys {
     pod: string;
   }
 
-  export interface IWeatherList {
+  export interface WeatherListItem {
     dt: number;
     dt_txt: string;
-    main: IWeatherMain;
-    weather: IWeather[];
-    clouds: IWeatherClouds;
-    wind: IWeatherWind;
+    main: WeatherMain;
+    weather: Weather[];
+    clouds: WeatherClouds;
+    wind: WeatherWind;
     visibility: number;
     pop: number;
-    rain: IWeatherRain;
-    sys: ISys;
+    rain: WeatherRain;
+    sys: Sys;
 
   }
 
-  export interface ICoordWeatherCity {
+  export interface CoordWeatherCity {
     lat: number;
     lon: number;
   }
 
-  export interface IWeatherCity {
+  export interface WeatherCity {
     id: number;
     name: string;
-    coord: ICoordWeatherCity;
+    coord: CoordWeatherCity;
     country: string;
     population: number;
     timezone: number;
@@ -67,12 +67,16 @@ declare module '@Weather' {
     sunset: number;
   }
 
-  export interface IWeatherData {
+  export interface WeatherData {
     cod: string;
     message: number;
     cnt: number;
-    list: IWeatherList[];
-    city: IWeatherCity;
+    list: WeatherListItem[];
+    city: WeatherCity;
+  }
+  export type  weatherDataInDay = WeatherListItem | {
+    dt_txt: string;
+    isEmpty : boolean
   }
 
 }

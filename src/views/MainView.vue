@@ -59,12 +59,14 @@ export default {
 
     //получение погоды
     watch(selectValue, async (selectValue) => {
-      const [lon, lat] = selectValue.GeoObject.Point.pos.split(' ')
-      window.history.pushState('lat-lon', 'lat-lon', `weather?lat=${lat}&lon=${lon}&city=${selectValue.label}`)
-      await store.dispatch('weather/getWeather', {
-        lon,
-        lat
-      })
+      if(selectValue) {
+        const [lon, lat] = selectValue.GeoObject.Point.pos.split(' ')
+        window.history.pushState('lat-lon', 'lat-lon', `weather?lat=${lat}&lon=${lon}&city=${selectValue.label}`)
+        await store.dispatch('weather/getWeather', {
+          lon,
+          lat
+        })
+      }
     })
 
     return {
