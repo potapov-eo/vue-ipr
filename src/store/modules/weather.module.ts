@@ -44,7 +44,7 @@ export default {
 
         commit('setWeather', {weather: data})
         commit('weatherDataInDays', {weatherDataInDays: weatherDataInDays})
-
+        data.list.map(item=>console.log(item.weather[0].main))
       } catch (e) {
         alert('ошибка получения погоды')
       }

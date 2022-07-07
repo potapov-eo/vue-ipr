@@ -2,7 +2,7 @@
 <template>
 
   <VueMultiselect
-    style="width: 1000px"
+    style="width: 1300px"
     ref="Multiselect"
     :options="options"
     @keyup="getOptions"
@@ -33,7 +33,7 @@
 <script>
 import VueMultiselect from 'vue-multiselect'
 import { ref, watch,  } from 'vue'
-import WeatherCard from '../weather-card/weather-card'
+import WeatherCard from '../weather-card/weather-card/weather-card'
 import { getCityList } from '@/api/getGeo'
 
 export default {
@@ -67,8 +67,5 @@ export default {
 </script>
 
 <style src="../../../node_modules/vue-multiselect/dist/vue-multiselect.css">
-.select-style{
-
-}
 
 </style>

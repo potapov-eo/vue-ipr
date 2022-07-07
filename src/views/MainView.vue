@@ -10,7 +10,6 @@
         :weatherDataInDay="item">
       </WeatherCard>
     </div>
-    <div v-else> weatherValue = 0</div>
 <!--    <app-carousel-composition></app-carousel-composition>-->
   </div>
 <!--  <app-carousel></app-carousel>-->
@@ -23,7 +22,7 @@ import SelectComponent from '/src/components/select-component/select-component'
 import AppCarousel from '/src/components/app-carousel/app-carousel'
 import AppCarouselComposition from '/src/components/app-carousel/app-carousel-compositon'
 import { useStore } from 'vuex'
-import WeatherCard from '../components/weather-card/weather-card'
+import WeatherCard from '../components/weather-card/weather-card/weather-card'
 import { useRoute } from 'vue-router'
 import { BCarousel, BCarouselSlide } from 'bootstrap-vue-3'
 import  './main-view.scss'
@@ -91,8 +90,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.x{
-
-}
 
 </style>

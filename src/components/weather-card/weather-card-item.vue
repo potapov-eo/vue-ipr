@@ -1,24 +1,31 @@
 <template>
   <div class="weather-card-item">
-  <div>{{ moment(weather.dt_txt).format(' HH:mm ') }}</div>
-  <div v-if="weather?.main?.temp" >{{ weather.main.temp }}</div>
-  <div v-else="weather?.main?.temp" >000000</div>
-    </div>
+    <h5 v-if="!weather?.isEmpty">{{ moment(weather.dt_txt).format(' HH:mm ') }}</h5>
+    <h5 v-else>{{ getTime(index) }}</h5>
+    <Icon :iconType="weather.weather? weather.weather[0].main : 'no'"/>
+    <h2 v-if="weather?.main?.temp">{{ Math.round(weather.main.temp) }} °C</h2>
+  </div>
 </template>
 
 
-<script >
-import './weather-card-item.scss'
-import moment from "moment";
+<script>
+import Icon from './icon/icon'
+import { getTime } from './utils'
+import moment from 'moment'
 
 export default {
 
-  props: ['weather'],
+  props: ['weather', 'index'],
 
-  setup(props) {
+  setup (props) {
+
     return {
-      moment
+      moment,
+      getTime
     }
+  },
+  components: {
+    Icon
   }
 }
 </script>

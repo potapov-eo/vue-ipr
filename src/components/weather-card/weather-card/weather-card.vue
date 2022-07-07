@@ -1,19 +1,21 @@
 <template>
 
-  <h3 class="week-day">{{  moment(weatherDataInDay[0].dt_txt).locale('ru').format('dddd') }}</h3>
+  <h2 class="week-day">{{  moment(weatherDataInDay[0].dt_txt).locale('ru').format('dddd') }}</h2>
 
   <div class="weather-card">
 
   <weather-card-item
-    v-for="item in weatherDataInDay"
-    :weather="item"  />
+    v-for="(item, i) in weatherDataInDay"
+    :weather="item"
+    :index="i"
+  />
 
   </div>
 </template>
 
 
 <script >
-import weatherCardItem from './weather-card-item'
+import weatherCardItem from '../weather-card-item'
 import './weather-card.scss'
 import moment from "moment";
 export default {
