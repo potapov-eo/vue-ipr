@@ -42,7 +42,6 @@ export default {
   setup (props) {
     const {} = toRefs(props)
     const store = useStore()
-    const router = useRouter()
     const route = useRoute()
     const { city } = route.query
     const initVal = city ? {
@@ -60,7 +59,6 @@ export default {
       if ( selectValue ) {
         const [lon, lat] = selectValue.GeoObject.Point.pos.split(' ')
        // await router.replace(`#/weather?lat=${lat}&lon=${lon}&city=${selectValue.label}`)
-        const ssws= route
         window.history.pushState('lat-lon', 'lat-lon', `#/weather?lat=${lat}&lon=${lon}&city=${selectValue.label}`)
        // debugger
         await store.dispatch('weather/getWeather', {

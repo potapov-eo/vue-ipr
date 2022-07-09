@@ -9,7 +9,7 @@
         controls
         indicators
         background="var(--primaryBlack)"
-        img-width="1200"
+        img-width="1500"
         img-height="480"
         @sliding-start="onSlideStart"
         @sliding-end="onSlideEnd"
@@ -34,7 +34,7 @@
           </p>
         </b-carousel-slide>-->
 <!--        <b-carousel-slide caption="11" id="1" active img-src="https://picsum.photos/1024/480/?image=58"></b-carousel-slide>-->
-        <b-carousel-slide caption="11" id="6" active img-src="https://picsum.photos/1024/480/?image=58"></b-carousel-slide>
+<!--        <b-carousel-slide caption="11" id="6" active img-src="https://picsum.photos/1024/480/?image=58"></b-carousel-slide>-->
         <b-carousel-slide v-for="(item, i) in weatherDataInDays" :id="i.toString()"  active img-blank  img-alt="Blank image">
           <WeatherCard
             :weatherDataInDay="item">

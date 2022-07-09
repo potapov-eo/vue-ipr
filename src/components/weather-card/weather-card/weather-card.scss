@@ -4,8 +4,8 @@ display: block !important;
 
 .weather-card{
 display: flex;
-  gap: 16px;
-
+ gap: 16px;
+justify-content: space-between
 }
 .week-day{
 margin: 50px 0;
