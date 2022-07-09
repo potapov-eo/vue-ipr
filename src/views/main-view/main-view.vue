@@ -59,9 +59,9 @@ export default {
     watch(selectValue, async (selectValue) => {
       if ( selectValue ) {
         const [lon, lat] = selectValue.GeoObject.Point.pos.split(' ')
-        //await router.replace(`weather#/weather?lat=${lat}&lon=${lon}&city=${selectValue.label}`)
+       // await router.replace(`#/weather?lat=${lat}&lon=${lon}&city=${selectValue.label}`)
         const ssws= route
-        window.history.pushState('lat-lon', 'lat-lon', `weather#/weather?lat=${lat}&lon=${lon}&city=${selectValue.label}`)
+        window.history.pushState('lat-lon', 'lat-lon', `#/weather?lat=${lat}&lon=${lon}&city=${selectValue.label}`)
        // debugger
         await store.dispatch('weather/getWeather', {
           lon,
