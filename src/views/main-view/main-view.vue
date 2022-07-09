@@ -17,7 +17,7 @@ import AppCarousel from '/src/components/app-carousel/app-carousel'
 import AppCarouselComposition from '/src/components/app-carousel/app-carousel-compositon'
 import { useStore } from 'vuex'
 import WeatherCard from '../../components/weather-card/weather-card/weather-card'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { BCarousel, BCarouselSlide } from 'bootstrap-vue-3'
 import './main-view.scss'
 import '../../assets/layouts/colors.scss'
@@ -42,6 +42,7 @@ export default {
   setup (props) {
     const {} = toRefs(props)
     const store = useStore()
+    const router = useRouter()
     const route = useRoute()
     const { city } = route.query
     const initVal = city ? {
@@ -58,7 +59,10 @@ export default {
     watch(selectValue, async (selectValue) => {
       if ( selectValue ) {
         const [lon, lat] = selectValue.GeoObject.Point.pos.split(' ')
-        window.history.pushState('lat-lon', 'lat-lon', `weather?lat=${lat}&lon=${lon}&city=${selectValue.label}`)
+        //await router.replace(`weather#/weather?lat=${lat}&lon=${lon}&city=${selectValue.label}`)
+        const ssws= route
+        window.history.pushState('lat-lon', 'lat-lon', `weather#/weather?lat=${lat}&lon=${lon}&city=${selectValue.label}`)
+       // debugger
         await store.dispatch('weather/getWeather', {
           lon,
           lat
