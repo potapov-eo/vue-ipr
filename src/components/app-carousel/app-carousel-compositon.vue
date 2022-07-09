@@ -1,6 +1,6 @@
 /* eslint-disable */
 <template>
-      <b-carousel
+      <b-carousel v-if="weatherDataInDays"
         ref="myCarousel"
         id="carousel-1"
         v-model="slide"
@@ -8,17 +8,16 @@
         :interval="4000"
         controls
         indicators
-        background="#ababab"
-        img-width="1024"
+        background="var(--primaryBlack)"
+        img-width="1200"
         img-height="480"
-        style="text-shadow: 1px 1px 2px #333;"
         @sliding-start="onSlideStart"
         @sliding-end="onSlideEnd"
       >
 <!--
         <b-carousel-slide v-for="(slides, i) in slides" :key="i" active :img-src="slides.text"></b-carousel-slide>
 -->
-        <b-carousel-slide caption="11" id="1" active img-src="https://picsum.photos/1024/480/?image=58"></b-carousel-slide>
+<!--        <b-carousel-slide caption="11" id="1" active img-src="https://picsum.photos/1024/480/?image=58"></b-carousel-slide>
         <b-carousel-slide caption="22" id="2" active img-src="https://picsum.photos/1024/480/?image=58"></b-carousel-slide>
 
         <b-carousel-slide   id="3" caption="Blank Image2" img-blank img-alt="Blank image">
@@ -33,10 +32,21 @@
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eros felis, tincidunt
             a tincidunt eget, convallis vel est. Ut pellentesque ut lacus vel interdum.
           </p>
+        </b-carousel-slide>-->
+<!--        <b-carousel-slide caption="11" id="1" active img-src="https://picsum.photos/1024/480/?image=58"></b-carousel-slide>-->
+        <b-carousel-slide caption="11" id="6" active img-src="https://picsum.photos/1024/480/?image=58"></b-carousel-slide>
+        <b-carousel-slide v-for="(item, i) in weatherDataInDays" :id="i.toString()"  active img-blank  img-alt="Blank image">
+          <WeatherCard
+            :weatherDataInDay="item">
+          </WeatherCard>
         </b-carousel-slide>
 
       </b-carousel>
   <button v-on:click="next">next</button>
+  <WeatherCard
+    v-for="item in weatherDataInDays"
+    :weatherDataInDay="item">
+  </WeatherCard>
   <p class="mt-4">
     Slide #: {{ slide }}<br>
     Sliding: {{ sliding }}
@@ -44,23 +54,20 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import { BCarousel, BCarouselSlide } from 'bootstrap-vue-3'
+import WeatherCard from '../../components/weather-card/weather-card/weather-card'
 
 export default {
-
+  props: {
+    weatherDataInDays:{required:true}
+  },
   setup (props) {
 
     const slide = ref(0)
     const sliding = ref(null)
     const myCarousel = ref(null)
-    const  slides = ref([
-      {text:  "https://picsum.photos/1024/480/?image=58"},
-      {text:  "https://picsum.photos/1024/480/?image=54"},
-      {text:  "https://picsum.photos/1024/480/?image=52"},
-      {text:  "https://picsum.photos/1024/480/?image=58"},
 
-    ])
     const next = () => {
       console.log('myCarousel',myCarousel)
       debugger
@@ -68,7 +75,7 @@ export default {
       // myCarousel.value.modelValue = 1
 
     }
-    const onSlideStart = () => {
+    const onSlideStart = (e) => {debugger
       sliding.value = true
     }
     const onSlideEnd = () => {
@@ -80,12 +87,13 @@ export default {
       myCarousel,
       next,
       onSlideStart,
-      onSlideEnd, sliding, slides
+      onSlideEnd, sliding
     }
   },
   components: {
     BCarouselSlide,
     BCarousel,
+    WeatherCard,
   }
 }
 </script>

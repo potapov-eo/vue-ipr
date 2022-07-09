@@ -62,9 +62,5 @@ export default {
 </script>
 
 <style  lang="scss">
-.no{
 
-  color: black;
-  opacity: 0.1;
-}
 </style>

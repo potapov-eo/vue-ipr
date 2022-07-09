@@ -1,17 +1,10 @@
 /* eslint-disable */
 <template>
   <div class="about">
-
     <h1 class="title">Погода</h1>
     <h4 class="time"> местное время: {{ time }} </h4>
     <SelectComponent v-model="selectValue"></SelectComponent>
-    <div v-if="!!weatherDataInDays">
-      <WeatherCard
-        v-for="item in weatherDataInDays"
-        :weatherDataInDay="item">
-      </WeatherCard>
-    </div>
-    <!--    <app-carousel-composition></app-carousel-composition>-->
+    <app-carousel-composition :weatherDataInDays="weatherDataInDays"></app-carousel-composition>
   </div>
   <!--  <app-carousel></app-carousel>-->
 
@@ -28,7 +21,6 @@ import { useRoute } from 'vue-router'
 import { BCarousel, BCarouselSlide } from 'bootstrap-vue-3'
 import './main-view.scss'
 import '../../assets/layouts/colors.scss'
-import moment from 'moment'
 import { useTime } from '@/views/main-view/use'
 
 export default {
@@ -99,5 +91,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
 
 </style>

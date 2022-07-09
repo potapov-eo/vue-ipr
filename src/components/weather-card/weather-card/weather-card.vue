@@ -1,5 +1,5 @@
 <template>
-
+<div class="weather_card-wraps">
   <h2 class="week-day">{{  moment(weatherDataInDay[0].dt_txt).locale('ru').format('dddd') }}</h2>
 
   <div class="weather-card">
@@ -9,7 +9,7 @@
     :weather="item"
     :index="i"
   />
-
+  </div>
   </div>
 </template>
 
