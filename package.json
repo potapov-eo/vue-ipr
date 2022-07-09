@@ -1,4 +1,5 @@
 {
+  "homepage": "https://potapov-eo.github.io/vue-ipr",
   "name": "vue-ipr",
   "version": "0.1.0",
   "private": true,
@@ -6,13 +7,16 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "axios": "^0.27.2",
     "bootstrap": "^5.1.3",
     "bootstrap-vue-3": "^0.1.13",
     "core-js": "^3.8.3",
+    "gh-pages": "^4.0.0",
     "moment": "^2.29.3",
     "vue": "^3.2.13",
     "vue-multiselect": "^3.0.0-alpha.2",
