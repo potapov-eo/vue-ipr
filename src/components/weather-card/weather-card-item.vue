@@ -7,9 +7,8 @@
   </div>
 </template>
 
-
 <script>
-import Icon from './icon/icon'
+import Icon from './icon'
 import { getTime } from './utils'
 import moment from 'moment'
 
@@ -18,7 +17,6 @@ export default {
   props: ['weather', 'index'],
 
   setup (props) {
-
     return {
       moment,
       getTime

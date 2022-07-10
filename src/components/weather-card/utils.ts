@@ -1,5 +1,5 @@
-export const  getTime = (i) => {
-  switch ( i ){
+export const getTime = (i) => {
+  switch (i) {
     case 0 : return '00:00'
     case 1 : return '03:00'
     case 2 : return '06:00'

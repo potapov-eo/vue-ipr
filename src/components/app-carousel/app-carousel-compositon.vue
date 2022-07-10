@@ -34,7 +34,7 @@
 <script>
 import { ref, reactive } from 'vue'
 import { BCarousel, BCarouselSlide, BCard } from 'bootstrap-vue-3'
-import WeatherCard from '../../components/weather-card/weather-card/weather-card'
+import WeatherCard from '../weather-card/weather-card'
 
 export default {
   props: {

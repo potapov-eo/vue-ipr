@@ -1,5 +1,57 @@
+<template>
+<div class="wrap">
+  <div v-if="iconType==='no'" class="icon sun-shower no">
+    <div class="cloud"></div>
+    <div class="sun">
+      <div class="rays"></div>
+    </div>
+  </div>
+
+  <div v-if="iconType==='Extreme'" class="icon thunder-storm">
+    <div class="cloud"></div>
+    <div class="lightning">
+      <div class="bolt"></div>
+      <div class="bolt"></div>
+    </div>
+  </div>
+
+  <div v-if="iconType==='Clouds'" class="icon cloudy">
+    <div class="cloud"></div>
+    <div class="cloud"></div>
+  </div>
+
+  <div v-if="iconType==='Snow'" class="icon flurries">
+    <div class="cloud"></div>
+    <div class="snow">
+      <div class="flake"></div>
+      <div class="flake"></div>
+    </div>
+  </div>
+
+  <div v-if="iconType==='Clear'" class="icon sunny">
+    <div class="sun">
+      <div class="rays"></div>
+    </div>
+  </div>
+
+  <div v-if="iconType==='Rain'" class="icon rainy">
+    <div class="cloud"></div>
+    <div class="rain"></div>
+  </div>
+</div>
+</template>
+
+<script setup>
+
+const props = defineProps({
+  iconType: String
+})
+
+</script>
+
+<style  lang="scss" scoped>
 .wrap {
-color: #101010;
+  color: #101010;
 }
 
 .icon {
@@ -216,7 +268,6 @@ color: #101010;
   animation: spin 16s linear infinite reverse;
 }
 
-
 /* Animations */
 
 @keyframes spin {
@@ -278,3 +329,5 @@ color: #101010;
     opacity: 0.2;
   }
 }
+
+</style>

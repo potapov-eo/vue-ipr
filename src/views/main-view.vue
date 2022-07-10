@@ -1,17 +1,25 @@
-/* eslint-disable */
+<template>
+  <div class="about">
+    <h1 class="title">Погода</h1>
+    <h4 class="time"> местное время: {{ time }} </h4>
+    <SelectComponent v-model="selectValue"></SelectComponent>
+    <app-carousel-composition :weatherDataInDays="weatherDataInDays"></app-carousel-composition>
+  </div>
+  <!--  <app-carousel></app-carousel>-->
 
-<script setup lang="ts">
-import { toRefs, ref, watch, computed, reactive, onBeforeMount } from 'vue'
+</template>
+
+<script setup>
+import { toRefs, ref, watch, computed, reactive, onBeforeMount, onUnmounted } from 'vue'
 import SelectComponent from '/src/components/select-component/select-component'
 import AppCarousel from '/src/components/app-carousel/app-carousel'
-import AppCarouselComposition from '/src/components/app-carousel/app-carousel-compositon'
+import AppCarouselComposition from '/src/components/app-carousel/app-carousel-quasar'
 import { useStore } from 'vuex'
-import WeatherCard from '../../components/weather-card/weather-card/weather-card'
+import WeatherCard from '../components/weather-card/weather-card'
 import { useRoute, useRouter } from 'vue-router'
 import { BCarousel, BCarouselSlide } from 'bootstrap-vue-3'
-import './main-view.scss'
-import '../../assets/layouts/colors.scss'
-import { useTime } from '@/views/main-view/use'
+import '../assets/layouts/colors.scss'
+import { useTime } from '@/views/use'
 
 onBeforeMount(() => {
   const route = useRoute()
@@ -38,43 +46,43 @@ const initVal = city
     }
   : null
 const selectValue = ref(initVal)
-const isLoading = ref(false)
-const options = ref([])
-/*const props = defineProps({
-  foo: String
-})*/
-
 const weatherValue = computed(() => store.getters['weather/weather'])
 const weatherDataInDays = computed(() => store.getters['weather/weatherDataInDays'])
+
 // получение погоды
 watch(selectValue, async (selectValue) => {
   if (selectValue) {
     const [lon, lat] = selectValue.GeoObject.Point.pos.split(' ')
-    // await router.replace(`#/weather?lat=${lat}&lon=${lon}&city=${selectValue.label}`)
     window.history.pushState('lat-lon', 'lat-lon', `#/weather?lat=${lat}&lon=${lon}&city=${selectValue.label}`)
     await store.dispatch('weather/getWeather', { lon, lat })
   }
 })
 
-// кастомные часы
-// Todo очистка интервала
 const {
   time,
   timeInterval
 } = useTime(weatherValue)
+onUnmounted(() => clearInterval(timeInterval))
 
 </script>
-<template>
-  <div class="about">
-    <h1 class="title">Погода</h1>
-    <h4 class="time"> местное время: {{ time }} </h4>
-    <SelectComponent v-model="selectValue"></SelectComponent>
-    <app-carousel-composition :weatherDataInDays="weatherDataInDays"></app-carousel-composition>
-  </div>
-  <!--  <app-carousel></app-carousel>-->
-
-</template>
 
 <style scoped lang="scss">
+
+.about {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  min-width: 1300px;
+  background: var(--primaryBlack);
+  color: var(--primaryWhite);
+  padding-top: 100px;
+};
+.title {
+  margin-bottom: 50px;
+}
+.time{
+  margin-bottom: 30px;
+}
 
 </style>

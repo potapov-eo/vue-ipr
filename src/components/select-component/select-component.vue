@@ -1,8 +1,7 @@
 /* eslint-disable */
 <template>
-
   <VueMultiselect
-    v-model="modelValueCurrent"
+    :loading="isLoading"
     style="width: 1300px"
     ref="Multiselect"
     :options="options"
@@ -30,53 +29,30 @@
 
 </template>
 
-<script >
+<script setup>
 import VueMultiselect from 'vue-multiselect'
 import { ref, watch } from 'vue'
-import WeatherCard from '@/components/weather-card/weather-card/weather-card'
+import WeatherCard from '@/components/weather-card/weather-card'
 import { getCityList } from '@/api/getGeo'
 
-export default {
-  props: {
-    modelValue: {
-      type: Object,
-      required: true
-    }
-  },
-  emits: ['update:modelValue'],
-  setup (props, { emit }) {
-    const Multiselect = ref(null)
-    const modelValueCurrent = ref(props.modelValue)
-    watch(modelValueCurrent, (modelValueCurrent) => emit('update:modelValue', modelValueCurrent))
+const Multiselect = ref(null)
 
-    const isLoading = ref(false)
-    const options = ref([])
-    const getOptions = async () => {
-      try {
-        options.value = await getCityList(Multiselect)
-      } catch (e) {
-        alert('Ошибка получения опций(гео)')
-      }
-    }
-    const clearOptions = () => {
-      options.value = []
-    }
-    return {
-      options,
-      getOptions,
-      Multiselect,
-      isLoading,
-      clearOptions,
-      modelValueCurrent
-    }
-  },
-  components: {
-    VueMultiselect,
-    WeatherCard
+const isLoading = ref(false)
+const options = ref([])
+const getOptions = async () => {
+  try {
+    isLoading.value = true
+    options.value = await getCityList(Multiselect)
+  } catch (e) {
+    alert('Ошибка получения опций(гео)')
+  } finally {
+    isLoading.value = false
   }
 }
+const clearOptions = () => {
+  options.value = []
+}
+
 </script>
-
 <style src="../../../node_modules/vue-multiselect/dist/vue-multiselect.css">
-
 </style>

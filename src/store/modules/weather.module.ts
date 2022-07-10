@@ -28,7 +28,6 @@ export default {
   },
   actions: {
     async getWeather ({ commit, dispatch }, payload) {
-      // const [lon, lat] = payload.value.GeoObject.Point.pos.split(' ')
       try {
         const { data } = await axios.get<WeatherData>(config.weatherApi, {
           params: {

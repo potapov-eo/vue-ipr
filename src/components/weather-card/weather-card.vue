@@ -13,28 +13,33 @@
   </div>
 </template>
 
-<script >
-import weatherCardItem from '../weather-card-item'
-import './weather-card.scss'
+<script setup>
+import weatherCardItem from './weather-card-item'
 import moment from 'moment'
-export default {
 
-  props: ['weatherDataInDay'],
+const props = defineProps({
+  weatherDataInDay: Object
+})
 
-  setup (props) {
-    return {
-      moment
-    }
-  },
-  components: {
-    weatherCardItem
-  }
-}
 </script>
 
 <style scoped lang="scss">
-.df{
-  margin: 30px 0;
+.weather_card-wraps{
+  display: block !important;
+}
+
+.weather-card{
+  display: flex;
+  gap: 16px;
+  justify-content: space-between
+}
+.week-day{
+  margin: 50px 0;
+}
+
+.no{
+  color: black;
+  opacity: 0.1;
 }
 
 </style>

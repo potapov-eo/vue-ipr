@@ -1337,6 +1337,11 @@
   "resolved" "https://registry.npmjs.org/@popperjs/core/-/core-2.11.5.tgz"
   "version" "2.11.5"
 
+"@quasar/extras@^1.0.0":
+  "integrity" "sha512-F9T1aIhRIiuJeuxPCu2CBlPj5js6mBZWQOAHHyVlreNa5qhVEHhr/9GfljG6RTnjvTNOjJraTl0hi8g0IuUfLw=="
+  "resolved" "https://registry.npmjs.org/@quasar/extras/-/extras-1.14.2.tgz"
+  "version" "1.14.2"
+
 "@sideway/address@^4.1.3":
   "integrity" "sha512-7vwq+rOHVWjyXxVlR76Agnvhy8I9rpzjosTESvmhNeXOXdZZB15Fl+TI9x1SiHZH5Jv2wTGduSxFDIaq0m3DUw=="
   "resolved" "https://registry.npmmirror.com/@sideway/address/-/address-4.1.4.tgz"
@@ -7121,6 +7126,11 @@
   dependencies:
     "side-channel" "^1.0.4"
 
+"quasar@^2.0.0":
+  "integrity" "sha512-DWI0S+bXASfMSPrB8c/LVsXpA4dF7cBUbaJlcrM+1ioTNBHtiudma2Nhk2SDd5bzk9AYVHh5A8JCZuKqQAXt7g=="
+  "resolved" "https://registry.npmjs.org/quasar/-/quasar-2.7.5.tgz"
+  "version" "2.7.5"
+
 "queue-microtask@^1.2.2":
   "integrity" "sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A=="
   "resolved" "https://registry.npmmirror.com/queue-microtask/-/queue-microtask-1.2.3.tgz"
@@ -8411,6 +8421,13 @@
   "integrity" "sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg=="
   "resolved" "https://registry.npmmirror.com/vary/-/vary-1.1.2.tgz"
   "version" "1.1.2"
+
+"vue-cli-plugin-quasar@~5.0.1":
+  "integrity" "sha512-yFPN0mRQJJH4a1AoLC6zDLxWzTjRQYKp8gO8wYQO43F+SK4qiMOeXrjsMvjUAa5QYxkbPa27rrwP59gTqTgKLQ=="
+  "resolved" "https://registry.npmjs.org/vue-cli-plugin-quasar/-/vue-cli-plugin-quasar-5.0.1.tgz"
+  "version" "5.0.1"
+  dependencies:
+    "webpack-merge" "^5.7.3"
 
 "vue-eslint-parser@^8.0.0", "vue-eslint-parser@^8.0.1":
   "integrity" "sha512-dzHGG3+sYwSf6zFBa0Gi9ZDshD7+ad14DGOdTLjruRVgZXe2J+DcZ9iUhyR48z5g1PqRa20yt3Njna/veLJL/g=="

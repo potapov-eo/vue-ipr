@@ -47,30 +47,30 @@
 import { BCarousel, BCarouselSlide } from 'bootstrap-vue-3'
 export default {
   props: { selectValue: {} },
-  data() {
+  data () {
     return {
       slide: 1,
       sliding: null,
       slides: [
-        {text:  "https://picsum.photos/1024/480/?image=58"},
-        {text:  "https://picsum.photos/1024/480/?image=54"},
-        {text:  "https://picsum.photos/1024/480/?image=58"},
-        {text:  "https://picsum.photos/1024/480/?image=58"},
+        { text: 'https://picsum.photos/1024/480/?image=58' },
+        { text: 'https://picsum.photos/1024/480/?image=54' },
+        { text: 'https://picsum.photos/1024/480/?image=58' },
+        { text: 'https://picsum.photos/1024/480/?image=58' }
 
       ]
     }
   },
   methods: {
-    onSlideStart(slide) {
+    onSlideStart (slide) {
       this.sliding = true
     },
-    onSlideEnd(slide) {
+    onSlideEnd (slide) {
       this.sliding = false
     }
   },
   components: {
     BCarouselSlide,
-    BCarousel,
+    BCarousel
   }
 }
 </script>
