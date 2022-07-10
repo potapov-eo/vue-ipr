@@ -2,6 +2,7 @@
 <template>
 
   <VueMultiselect
+    v-model="modelValueCurrent"
     style="width: 1300px"
     ref="Multiselect"
     :options="options"
@@ -27,23 +28,32 @@
     </template>
   </VueMultiselect>
 
-
 </template>
 
-<script>
+<script >
 import VueMultiselect from 'vue-multiselect'
-import { ref, watch,  } from 'vue'
-import WeatherCard from '../weather-card/weather-card/weather-card'
+import { ref, watch } from 'vue'
+import WeatherCard from '@/components/weather-card/weather-card/weather-card'
 import { getCityList } from '@/api/getGeo'
 
 export default {
-  setup (props, context) {
+  props: {
+    modelValue: {
+      type: Object,
+      required: true
+    }
+  },
+  emits: ['update:modelValue'],
+  setup (props, { emit }) {
     const Multiselect = ref(null)
+    const modelValueCurrent = ref(props.modelValue)
+    watch(modelValueCurrent, (modelValueCurrent) => emit('update:modelValue', modelValueCurrent))
+
     const isLoading = ref(false)
     const options = ref([])
     const getOptions = async () => {
       try {
-         options.value = await getCityList(Multiselect)
+        options.value = await getCityList(Multiselect)
       } catch (e) {
         alert('Ошибка получения опций(гео)')
       }
@@ -57,11 +67,12 @@ export default {
       Multiselect,
       isLoading,
       clearOptions,
+      modelValueCurrent
     }
   },
   components: {
     VueMultiselect,
-    WeatherCard,
+    WeatherCard
   }
 }
 </script>

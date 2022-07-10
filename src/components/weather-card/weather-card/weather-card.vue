@@ -13,16 +13,15 @@
   </div>
 </template>
 
-
 <script >
 import weatherCardItem from '../weather-card-item'
 import './weather-card.scss'
-import moment from "moment";
+import moment from 'moment'
 export default {
 
   props: ['weatherDataInDay'],
 
-  setup(props) {
+  setup (props) {
     return {
       moment
     }
