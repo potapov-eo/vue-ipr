@@ -14,7 +14,7 @@
         height="500px"
         class="carousel"
       >
-        <q-carousel-slide v-for="(item, i) in weatherDataInDays" key="i" :name="moment(item[0].dt_txt).format('L')" class="column no-wrap flex-center">
+        <q-carousel-slide v-for="(item, i) in weatherDataInDays" :key="i" :name="moment(item[0].dt_txt).format('L')" class="column no-wrap flex-center">
          <WeatherCard
             :weatherDataInDay="item">
           </WeatherCard>

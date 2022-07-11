@@ -3,7 +3,12 @@
     <h1 class="title">Погода</h1>
     <h4 class="time"> местное время: {{ time }} </h4>
     <SelectComponent v-model="selectValue"></SelectComponent>
-    <app-carousel-composition :weatherDataInDays="weatherDataInDays"></app-carousel-composition>
+    <div class="carousel">
+    <app-carousel-composition v-if="!isWeatherLoading" :weatherDataInDays="weatherDataInDays"></app-carousel-composition>
+      <div v-else class="spinner"  >
+      <q-spinner-ios  color="#f9f9f9" size="100px" />
+      </div>
+    </div>
   </div>
   <!--  <app-carousel></app-carousel>-->
 
@@ -48,6 +53,7 @@ const initVal = city
 const selectValue = ref(initVal)
 const weatherValue = computed(() => store.getters['weather/weather'])
 const weatherDataInDays = computed(() => store.getters['weather/weatherDataInDays'])
+const isWeatherLoading = computed(() => store.getters['weather/isWeatherLoading'])
 
 // получение погоды
 watch(selectValue, async (selectValue) => {
@@ -84,5 +90,20 @@ onUnmounted(() => clearInterval(timeInterval))
 .time{
   margin-bottom: 30px;
 }
-
+.carousel{
+  height: 532px;
+  width: 100%;
+}
+.spinner{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #101010;
+  opacity: 0.8;
+  z-index: 1000;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0
+}
 </style>

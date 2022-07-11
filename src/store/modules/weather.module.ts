@@ -8,6 +8,7 @@ export type weatherType = WeatherData
 export type weatherStateType = {
   weather: weatherType | null;
   weatherDataInDays: weatherDataInDay [] [] | null;
+  isWeatherLoading: boolean
 }
 
 export default {
@@ -15,20 +16,25 @@ export default {
   state ():weatherStateType {
     return {
       weather: null,
-      weatherDataInDays: null
+      weatherDataInDays: null,
+      isWeatherLoading : false
     }
   },
   mutations: {
     setWeather (state, payload) {
       state.weather = payload.weather
     },
-    weatherDataInDays (state, payload) {
+    setWeatherDataInDays (state, payload) {
       state.weatherDataInDays = payload.weatherDataInDays
+    },
+    setIsWeatherLoading (state, payload) {
+      state.isWeatherLoading = payload.isWeatherLoading
     }
   },
   actions: {
     async getWeather ({ commit, dispatch }, payload) {
       try {
+        commit('setIsWeatherLoading', { isWeatherLoading: true })
         const { data } = await axios.get<WeatherData>(config.weatherApi, {
           params: {
             appid: config.apiKeyWeather,
@@ -41,9 +47,11 @@ export default {
         const weatherDataInDays = getWeatherDataInDay(data, numberIntervalPerDay)
 
         commit('setWeather', { weather: data })
-        commit('weatherDataInDays', { weatherDataInDays: weatherDataInDays })
+        commit('setWeatherDataInDays', { weatherDataInDays: weatherDataInDays })
       } catch (e) {
         alert('ошибка получения погоды')
+      } finally {
+        commit('setIsWeatherLoading', { isWeatherLoading: false })
       }
     }
   },
@@ -54,6 +62,9 @@ export default {
     },
     weatherDataInDays (state: weatherStateType) {
       return state.weatherDataInDays
+    },
+    isWeatherLoading (state: weatherStateType) {
+      return state.isWeatherLoading
     }
   }
 }
