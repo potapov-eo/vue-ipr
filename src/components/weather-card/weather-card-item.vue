@@ -7,15 +7,17 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import Icon from './icon'
 import { getTime } from './utils'
 import moment from 'moment'
+import { weatherDataInDay } from '@/store/modules/utils'
 
-const props = defineProps({
-  weather: Object,
+type propsType = {
+  weather: weatherDataInDay ;
   index: Number
-})
+}
+const props = defineProps<propsType>()
 
 </script>
 

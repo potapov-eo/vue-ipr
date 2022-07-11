@@ -1,13 +1,13 @@
 import axios from 'axios'
 import config from '../../../config'
-import { WeatherData, weatherDataInDay } from '@Weather'
-import { getWeatherDataInDay } from '@/store/modules/utils'
+import { WeatherData } from '@Weather'
+import { getWeatherDataInDay, weatherDataInDay } from '@/store/modules/utils'
+
 const instance = axios.create({
   baseURL: config.weatherApi,
   withCredentials: false,
   headers: {
-    'Access-Control-Allow-Credentials': '*',
-    'Content-Type': 'application/json'
+    /*'Access-Control-Allow-Credentials': '*',*/
   }
 })
 export const numberIntervalPerDay = 8

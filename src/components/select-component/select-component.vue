@@ -29,16 +29,17 @@
 
 </template>
 
-<script setup>
+<script setup lang="ts">
 import VueMultiselect from 'vue-multiselect'
-import { ref, watch } from 'vue'
+import { ref, Ref } from 'vue'
 import WeatherCard from '@/components/weather-card/weather-card'
-import { getCityList } from '@/api/getGeo'
+import { getCityList, SelectOptions } from '@/api/getGeo'
 
 const Multiselect = ref(null)
 
 const isLoading = ref(false)
-const options = ref([])
+const options: Ref<SelectOptions|[]> = ref([])
+
 const getOptions = async () => {
   try {
     isLoading.value = true

@@ -74,9 +74,6 @@ declare module '@Weather' {
     list: WeatherListItem[];
     city: WeatherCity;
   }
-  export type weatherDataInDay = WeatherListItem | {
-    dt_txt: string;
-    isEmpty : boolean
-  }
 
 }
+

@@ -1,11 +1,11 @@
 <template>
 <div class="weather_card-wraps">
-  <h2 class="week-day">{{  moment(weatherDataInDay[0].dt_txt).locale('ru').format('dddd') }}</h2>
+  <h2 class="week-day">{{  moment(props.weatherDataInDay[0].dt_txt).locale('ru').format('dddd') }}</h2>
 
   <div class="weather-card">
 
   <weather-card-item
-    v-for="(item, i) in weatherDataInDay"
+    v-for="(item, i) in props.weatherDataInDay"
     :weather="item"
     :index="i"
   />
@@ -13,13 +13,16 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import weatherCardItem from './weather-card-item'
 import moment from 'moment'
+import { weatherDataInDay } from '@/store/modules/utils'
 
-const props = defineProps({
-  weatherDataInDay: Object
-})
+
+type propsType = {
+  weatherDataInDay: weatherDataInDay [] ;
+}
+const props = defineProps<propsType>()
 
 </script>
 

@@ -1,6 +1,10 @@
 import moment from 'moment'
-import { WeatherData, weatherDataInDay, WeatherListItem } from '@Weather'
+import { WeatherData, WeatherListItem } from '@Weather'
 
+export type weatherDataInDay = WeatherListItem | {
+  dt_txt: string;
+  isEmpty : boolean
+}
 export const getWeatherDataInDay = (data: WeatherData, numberIntervalPerDay: number) : weatherDataInDay [] [] => {
   const dates = Array.from(new Set(data.list.map(item => moment(item.dt_txt).format('L'))))
   const weatherDataInDays: weatherDataInDay[][] = dates.reduce((arr, date, i) => {

@@ -26,19 +26,23 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, watch } from 'vue'
 import moment from 'moment'
 import WeatherCard from '../weather-card/weather-card'
 import { useRoute } from 'vue-router'
-const props = defineProps({
-  weatherDataInDays: Array
-})
+import { weatherDataInDay } from '@/store/modules/utils'
+
+type propsType = {
+  weatherDataInDays: weatherDataInDay [] [] ;
+}
+const props = defineProps<propsType>()
 
 const route = useRoute()
 const { slide } = route.query
 const isData = props.weatherDataInDays.some(item => moment(item[0].dt_txt).format('L') === slide)
-const initSlide = isData ? slide : moment(props.weatherDataInDays[0][0]).format('L')
+
+const initSlide = isData ? slide : moment(props.weatherDataInDays[0][0].dt_txt).format('L')
 
 const carouselSlide = ref(initSlide)
 
@@ -51,6 +55,7 @@ watch(carouselSlide, (carouselSlide) => {
     currentRoute = routeArr.join('&')
   }
   window.history.pushState('lat-lon', 'lat-lon', `${currentRoute}&slide=${carouselSlide}`)
+
 })
 
 </script>

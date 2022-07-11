@@ -10,14 +10,12 @@
       </div>
     </div>
   </div>
-  <!--  <app-carousel></app-carousel>-->
 
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { toRefs, ref, watch, computed, reactive, onBeforeMount, onUnmounted } from 'vue'
 import SelectComponent from '/src/components/select-component/select-component'
-import AppCarousel from '/src/components/app-carousel/app-carousel'
 import AppCarouselComposition from '/src/components/app-carousel/app-carousel-quasar'
 import { useStore } from 'vuex'
 import WeatherCard from '../components/weather-card/weather-card'
@@ -25,6 +23,8 @@ import { useRoute, useRouter } from 'vue-router'
 import { BCarousel, BCarouselSlide } from 'bootstrap-vue-3'
 import '../assets/layouts/colors.scss'
 import { useTime } from '@/views/use'
+import { WeatherData } from '@Weather'
+import { weatherDataInDay } from '@/store/modules/utils'
 
 onBeforeMount(() => {
   const route = useRoute()
@@ -51,9 +51,9 @@ const initVal = city
     }
   : null
 const selectValue = ref(initVal)
-const weatherValue = computed(() => store.getters['weather/weather'])
-const weatherDataInDays = computed(() => store.getters['weather/weatherDataInDays'])
-const isWeatherLoading = computed(() => store.getters['weather/isWeatherLoading'])
+const weatherValue = computed<WeatherData>(() => store.getters['weather/weather'])
+const weatherDataInDays = computed<weatherDataInDay [] [] | null>(() => store.getters['weather/weatherDataInDays'])
+const isWeatherLoading = computed<boolean>(() => store.getters['weather/isWeatherLoading'])
 
 // получение погоды
 watch(selectValue, async (selectValue) => {
