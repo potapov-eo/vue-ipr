@@ -10,7 +10,7 @@ export const useTime = (weatherValue: any) => {
       const localTime = new Date(Date.now() + timezone)
       return moment(localTime).add(timezone, 'hours').format(' HH:mm:ss')
     } else {
-      return '----'
+      return moment(new Date()).format(' HH:mm:ss')
     }
   }
 

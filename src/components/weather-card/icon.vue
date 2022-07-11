@@ -329,5 +329,8 @@ const props = defineProps({
     opacity: 0.2;
   }
 }
-
+.no {
+  color: black;
+  opacity: 0.1;
+}
 </style>
