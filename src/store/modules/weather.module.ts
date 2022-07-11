@@ -2,7 +2,14 @@ import axios from 'axios'
 import config from '../../../config'
 import { WeatherData, weatherDataInDay } from '@Weather'
 import { getWeatherDataInDay } from '@/store/modules/utils'
-
+const instance = axios.create({
+  baseURL: config.weatherApi,
+  withCredentials: false,
+  headers: {
+    'Access-Control-Allow-Credentials': '*',
+    'Content-Type': 'application/json'
+  }
+})
 export const numberIntervalPerDay = 8
 export type weatherType = WeatherData
 export type weatherStateType = {
@@ -35,15 +42,14 @@ export default {
     async getWeather ({ commit, dispatch }, payload) {
       try {
         commit('setIsWeatherLoading', { isWeatherLoading: true })
-        const { data } = await axios.get<WeatherData>(config.weatherApi, {
+        const { data } = await instance.get<WeatherData>('/', {
           params: {
             appid: config.apiKeyWeather,
             lat: payload.lat,
             lon: payload.lon,
             units: 'metric',
             lang: 'ru'
-          },
-          headers: { 'Access-Control-Allow-Origin': '*' }
+          }
         })
         const weatherDataInDays = getWeatherDataInDay(data, numberIntervalPerDay)
 

@@ -3,7 +3,7 @@
     <h1 class="title">Погода</h1>
     <h4 class="time"> местное время: {{ time }} </h4>
     <SelectComponent v-model="selectValue"></SelectComponent>
-    <div class="carousel">
+    <div v-if="!!weatherDataInDays" class="carousel">
     <app-carousel-composition v-if="!isWeatherLoading" :weatherDataInDays="weatherDataInDays"></app-carousel-composition>
       <div v-else class="spinner"  >
       <q-spinner-ios  color="#f9f9f9" size="100px" />
