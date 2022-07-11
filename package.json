@@ -89,5 +89,9 @@
   "jest": {
     "preset": "@vue/cli-plugin-unit-jest/presets/typescript-and-babel"
   },
+  "engines": {
+    "node": "16.x",
+    "npm": "8.5.5"
+  },
   "homepage": "https://potapov-eo.github.io/vue-ipr"
 }
