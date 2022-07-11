@@ -17,7 +17,7 @@ export default {
     return {
       weather: null,
       weatherDataInDays: null,
-      isWeatherLoading : false
+      isWeatherLoading: false
     }
   },
   mutations: {
@@ -42,7 +42,8 @@ export default {
             lon: payload.lon,
             units: 'metric',
             lang: 'ru'
-          }
+          },
+          headers: { 'Access-Control-Allow-Origin': '*' }
         })
         const weatherDataInDays = getWeatherDataInDay(data, numberIntervalPerDay)
 
